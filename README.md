@@ -1,3 +1,5 @@
+R interface for SCS.
+
 To install just type (in this dir):
 
 ./install.sh
