@@ -1,9 +1,10 @@
 #include <R.h>
 #include <Rinternals.h>
 #include <Rdefines.h>
-#include "../../include/scs.h"
-#include "../../include/util.h"
-#include "../../linsys/amatrix.h"
+#include "scs/include/scs.h"
+#include "scs/include/constants.h"
+#include "scs/include/util.h"
+#include "scs/linsys/amatrix.h"
 
 SEXP getListElement(SEXP list, const char *str) {
     SEXP elmt = R_NilValue, names = getAttrib(list, R_NamesSymbol);
@@ -62,7 +63,7 @@ scs_int *getIntVectorFromList(SEXP list, const char *str, scs_int *len) {
     return INTEGER(vec);
 }
 
-SEXP populateInfoR(Info *info, scs_int *num_protectaddr) {
+SEXP populateInfoR(ScsInfo *info, scs_int *num_protectaddr) {
     scs_int num_protected = 0;
     SEXP infor, info_names, iter_r, status_r, statusVal_r, pobj_r, dobj_r,
         resPri_r, resDual_r, resInfeas_r, resUnbdd_r, relGap_r, setupTime_r,
@@ -88,7 +89,7 @@ SEXP populateInfoR(Info *info, scs_int *num_protectaddr) {
 
     PROTECT(statusVal_r = allocVector(INTSXP, 1));
     num_protected++;
-    INTEGER(statusVal_r)[0] = info->statusVal;
+    INTEGER(statusVal_r)[0] = info->status_val;
     SET_STRING_ELT(info_names, 2, mkChar("statusVal"));
     SET_VECTOR_ELT(infor, 2, statusVal_r);
 
@@ -106,43 +107,43 @@ SEXP populateInfoR(Info *info, scs_int *num_protectaddr) {
 
     PROTECT(resPri_r = allocVector(REALSXP, 1));
     num_protected++;
-    REAL(resPri_r)[0] = info->resPri;
+    REAL(resPri_r)[0] = info->res_pri;
     SET_STRING_ELT(info_names, 5, mkChar("resPri"));
     SET_VECTOR_ELT(infor, 5, resPri_r);
 
     PROTECT(resDual_r = allocVector(REALSXP, 1));
     num_protected++;
-    REAL(resDual_r)[0] = info->resDual;
+    REAL(resDual_r)[0] = info->res_dual;
     SET_STRING_ELT(info_names, 6, mkChar("resDual"));
     SET_VECTOR_ELT(infor, 6, resDual_r);
 
     PROTECT(resInfeas_r = allocVector(REALSXP, 1));
     num_protected++;
-    REAL(resInfeas_r)[0] = info->resInfeas;
+    REAL(resInfeas_r)[0] = info->res_infeas;
     SET_STRING_ELT(info_names, 7, mkChar("resInfeas"));
     SET_VECTOR_ELT(infor, 7, resInfeas_r);
 
     PROTECT(resUnbdd_r = allocVector(REALSXP, 1));
     num_protected++;
-    REAL(resUnbdd_r)[0] = info->resUnbdd;
+    REAL(resUnbdd_r)[0] = info->res_unbdd;
     SET_STRING_ELT(info_names, 8, mkChar("resUnbdd"));
     SET_VECTOR_ELT(infor, 8, resUnbdd_r);
 
     PROTECT(relGap_r = allocVector(REALSXP, 1));
     num_protected++;
-    REAL(relGap_r)[0] = info->relGap;
+    REAL(relGap_r)[0] = info->rel_gap;
     SET_STRING_ELT(info_names, 9, mkChar("relGap"));
     SET_VECTOR_ELT(infor, 9, relGap_r);
 
     PROTECT(setupTime_r = allocVector(REALSXP, 1));
     num_protected++;
-    REAL(setupTime_r)[0] = info->setupTime;
+    REAL(setupTime_r)[0] = info->setup_time;
     SET_STRING_ELT(info_names, 10, mkChar("setupTime"));
     SET_VECTOR_ELT(infor, 10, setupTime_r);
 
     PROTECT(solveTime_r = allocVector(REALSXP, 1));
     num_protected++;
-    REAL(solveTime_r)[0] = info->solveTime;
+    REAL(solveTime_r)[0] = info->solve_time;
     SET_STRING_ELT(info_names, 11, mkChar("solveTime"));
     SET_VECTOR_ELT(infor, 11, solveTime_r);
 
@@ -155,12 +156,12 @@ SEXP scsr(SEXP data, SEXP cone, SEXP params) {
     SEXP ret, retnames, infor, xr, yr, sr;
 
     /* allocate memory */
-    Data *d = scs_malloc(sizeof(Data));
-    Cone *k = scs_malloc(sizeof(Cone));
-    Settings *stgs = scs_malloc(sizeof(Settings));
-    AMatrix *A = scs_malloc(sizeof(AMatrix));
-    Info *info = scs_calloc(1, sizeof(Info));
-    Sol *sol = scs_calloc(1, sizeof(Sol));
+    ScsData *d = scs_malloc(sizeof(ScsData));
+    ScsCone *k = scs_malloc(sizeof(ScsCone));
+    ScsSettings *stgs = scs_malloc(sizeof(ScsSettings));
+    ScsMatrix *A = scs_malloc(sizeof(ScsMatrix));
+    ScsInfo *info = scs_calloc(1, sizeof(ScsInfo));
+    ScsSolution *sol = scs_calloc(1, sizeof(ScsSolution));
 
     d->b = getFloatVectorFromList(data, "b", &len);
     d->c = getFloatVectorFromList(data, "c", &len);
@@ -228,7 +229,7 @@ SEXP scsr(SEXP data, SEXP cone, SEXP params) {
     scs_free(k);
     scs_free(stgs);
     scs_free(A);
-    freeSol(sol);
+    free_sol(sol);
     UNPROTECT(num_protected);
     return ret;
 }

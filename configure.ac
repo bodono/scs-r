@@ -6,8 +6,8 @@ SCS_FLAGS="-DLAPACK_LIB_FOUND -DCOPYAMATRIX -DUSING_R"
 SCS_LIBS="-lm"
 SCS_OUT_LIB="out/libscsdir.a"
 
-PKG_CFLAGS="-I../../include"
-PKG_LIBS="-L../../out -lscsdir"
+PKG_CFLAGS="-Iscs/include"
+PKG_LIBS="-Lscs/out -lscsdir"
 
 dnl Find the R home directory.
 : ${R_HOME=`R RHOME`}

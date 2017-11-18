@@ -2,7 +2,8 @@
 
 # clean up any remaining files from previous runs
 ./cleanup
-cd .. && make purge && cd r
+# old version:
+#cd .. && make purge && cd r
 
 # run autoconf to generate config
 # usually not necessary unless configure file missing or out of date
