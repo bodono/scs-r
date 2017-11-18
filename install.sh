@@ -2,8 +2,7 @@
 
 # clean up any remaining files from previous runs
 ./cleanup
-# old version:
-#cd .. && make purge && cd r
+cd src/scs && make purge && cd ../../
 
 # run autoconf to generate config
 # usually not necessary unless configure file missing or out of date
@@ -17,5 +16,5 @@ R CMD INSTALL .
 ./cleanup
 
 # run basic example
-R --no-save < demo/randomLp.R
+R --no-save < test/random_lp.R
 
