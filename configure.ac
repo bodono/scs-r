@@ -2,12 +2,15 @@ dnl R interface to SCS
 
 AC_INIT([scs], 2.0.0)
 
-SCS_FLAGS="-DLAPACK_LIB_FOUND -DCOPYAMATRIX -DUSING_R"
+SCS_FLAGS="-DUSE_LAPACK -DCOPYAMATRIX -DUSING_R -DEXTRA_VERBOSE=0"
 dnl SCS_LIBS="-lm"
-SCS_OUT_LIB="out/libscsindir.a"
+
+dnl TODO XXX THERE IS A PROBLEM WITH THE INDIRECT VERSION
+dnl DO NOT USE INDIRECT VERSION UNTIL RESOLVED
+SCS_OUT_LIB="out/libscsdir.a"
+PKG_LIBS="-Lscs/out -lscsdir"
 
 PKG_CFLAGS="-Iscs/include"
-PKG_LIBS="-Lscs/out -lscsindir"
 
 dnl Find the R home directory.
 : ${R_HOME=`R RHOME`}
