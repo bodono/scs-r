@@ -4,10 +4,10 @@ AC_INIT([scs], 2.0.0)
 
 SCS_FLAGS="-DLAPACK_LIB_FOUND -DCOPYAMATRIX -DUSING_R"
 dnl SCS_LIBS="-lm"
-SCS_OUT_LIB="out/libscsdir.a"
+SCS_OUT_LIB="out/libscsindir.a"
 
 PKG_CFLAGS="-Iscs/include"
-PKG_LIBS="-Lscs/out -lscsdir"
+PKG_LIBS="-Lscs/out -lscsindir"
 
 dnl Find the R home directory.
 : ${R_HOME=`R RHOME`}

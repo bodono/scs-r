@@ -2,6 +2,7 @@ library(scs)
 m = 100
 n = 100
 
+set.seed(1)
 A <- matrix(rnorm(m*n),m,n)
 b = rnorm(m)
 c = rnorm(n)

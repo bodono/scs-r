@@ -183,6 +183,8 @@ SEXP scsr(SEXP data, SEXP cone, SEXP params) {
     stgs->rho_x = getFloatFromListWithDefault(params, "rho_x", RHO_X);
     stgs->alpha = getFloatFromListWithDefault(params, "alpha", ALPHA);
     stgs->eps = getFloatFromListWithDefault(params, "eps", EPS);
+    stgs->acceleration_lookback = getFloatFromListWithDefault(params, \
+        "acceleration_lookback", ACCELERATION_LOOKBACK);
     /* TODO add warm starting */
     stgs->warm_start =
         getIntFromListWithDefault(params, "warm_start", WARM_START);

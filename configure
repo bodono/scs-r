@@ -1733,10 +1733,11 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 SCS_FLAGS="-DLAPACK_LIB_FOUND -DCOPYAMATRIX -DUSING_R"
-SCS_OUT_LIB="out/libscsdir.a"
+SCS_LIBS="-lm"
+SCS_OUT_LIB="out/libscsindir.a"
 
 PKG_CFLAGS="-Iscs/include"
-PKG_LIBS="-Lscs/out -lscsdir"
+PKG_LIBS="-Lscs/out -lscsindir"
 
 : ${R_HOME=`R RHOME`}
 if test -z "${R_HOME}"; then
