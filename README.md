@@ -1,10 +1,22 @@
-R interface for SCS.
+# scs-r
+R interface for [SCS](https://github.com/cvxgrp/scs) 2.0.0 and higher.
 
-To install just type (in this dir):
-
+To install SCS as an R package from source:
+```shell
+git clone --recursive https://github.com/bodono/scs-r.git
+cd scs-r
 ./install.sh
+```
+this should install SCS globally. To test type
+```shell
+R --no-save < demo/randomLp.R
+```
+(this is also called by the install script).
 
-This should install the package SCS globally.
-To test, then simply type (in this dir):
+To call SCS use the function `scs`, defined as
+```R
+scs <- function(A, b, c, cone, params)
+```
+where `A` is a `Matrix` object, `b` and `c` are vectors, and `cone` and `params`
+are lists specifying the cone dimensions and input params respectively.
 
-R --no-save < test/random_lp.R
