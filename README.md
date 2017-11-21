@@ -9,7 +9,7 @@ cd scs-r
 ```
 this should install SCS globally. To test type
 ```shell
-R --no-save < demo/randomLp.R
+R --no-save < test/random_lp.R
 ```
 (this is also called by the install script).
 
