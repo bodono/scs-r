@@ -1,7 +1,7 @@
 #include <R.h>
 #include <Rdefines.h>
 #include <Rinternals.h>
-#include "scs/include/constants.h"
+#include "scs/include/glbopts.h"
 #include "scs/include/scs.h"
 #include "scs/include/util.h"
 #include "scs/linsys/amatrix.h"
@@ -231,7 +231,7 @@ SEXP scsr(SEXP data, SEXP cone, SEXP params) {
   scs_free(k);
   scs_free(stgs);
   scs_free(A);
-  free_sol(sol);
+  SCS(free_sol)(sol);
   UNPROTECT(num_protected);
   return ret;
 }
