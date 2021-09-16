@@ -1,4 +1,4 @@
-##WARNING: Use [Florian Schwendinger's](https://github.com/FlorianSchwendinger/scs) package instead. This package is deprecated.
+#WARNING: Use [Florian Schwendinger's](https://github.com/FlorianSchwendinger/scs) package instead. This package is deprecated.
 
 
 OLD README:
