@@ -1,3 +1,8 @@
+##WARNING: Use [Florian Schwendinger's](https://github.com/FlorianSchwendinger/scs) package instead. This package is deprecated.
+
+
+OLD README:
+
 # scs-r
 R interface for [SCS](https://github.com/cvxgrp/scs) 2.0.0 and higher.
 
